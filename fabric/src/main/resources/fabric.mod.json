@@ -25,6 +25,9 @@
     "fabricloader": ">=0.15.10",
     "minecraft": "${minecraft_range_fabric}",
     "java": ">=8",
-    "figura": "~0.1.5"
+    "figura": [
+      "~0.1.5",
+      "~0.1.5b+1.21.4"
+    ]
   }
 }
