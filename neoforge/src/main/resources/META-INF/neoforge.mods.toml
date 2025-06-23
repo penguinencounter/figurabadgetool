@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[${forge_minimum},)"
+loaderVersion = "[1,)"
 #issueTrackerURL = ""
 license = "MIT"
 
@@ -15,16 +15,18 @@ description = '''
 #logoFile = ""
 
 [[dependencies.figurabadgetool]]
-modId = "forge"
+modId = "neoforge"
 mandatory = true
-versionRange = "[${forge_minimum},)"
+versionRange = "${neoforge_range}"
 ordering = "NONE"
-side = "BOTH"
+side = "CLIENT"
 
 [[dependencies.figurabadgetool]]
 modId = "minecraft"
 mandatory = true
 versionRange = "${minecraft_range_forge}"
 ordering = "NONE"
-side = "BOTH"
+side = "CLIENT"
 
+[[mixins]]
+config = "figurabadgetool.mixins.json"

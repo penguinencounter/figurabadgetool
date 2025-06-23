@@ -1,5 +1,5 @@
 plugins {
-    id 'dev.architectury.loom' version '1.10-SNAPSHOT' apply false
+    id 'dev.architectury.loom' version '1.9-SNAPSHOT' apply false
     id 'architectury-plugin' version '3.4-SNAPSHOT'
     id 'com.github.johnrengelman.shadow' version '8.1.1' apply false
 }
@@ -30,22 +30,30 @@ subprojects {
         // See https://docs.gradle.org/current/userguide/declaring_repositories.html
         // for more information about repositories.
         maven {
-            name "FiguraReleases"
+            name "Figura Releases"
             url "https://maven.figuramc.org/releases"
         }
         maven {
-            name "FiguraSnapshots"
+            name "Figura Snapshots"
             url "https://maven.figuramc.org/snapshots"
         }
         maven {
             name "Jitpack"
             url "https://www.jitpack.io"
         }
+        maven {
+            name "NeoForge Releases"
+            url 'https://maven.neoforged.net/releases/'
+        }
     }
 
     dependencies {
         minecraft "net.minecraft:minecraft:$rootProject.minecraft_version"
         mappings loom.officialMojangMappings()
+
+        localRuntime "com.github.FiguraMC.luaj:luaj-core:$luaj-figura"
+        localRuntime "com.github.FiguraMC.luaj:luaj-jse:$luaj-figura"
+        localRuntime "com.neovisionaries:nv-websocket-client:$nv_websocket"
     }
 
     java {

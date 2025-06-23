@@ -10,5 +10,6 @@ pluginManagement {
 rootProject.name = 'figurabadgetool'
 
 include 'common'
-include 'fabric'
-include 'forge'
+if (is_fabric == "True") include 'fabric'
+if (is_forge == "True") include 'forge'
+if (is_neo == "True") include 'neoforge'

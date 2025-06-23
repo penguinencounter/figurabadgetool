@@ -33,7 +33,7 @@ public class FiguraBadgeNetworkImpl {
     public static void clearBadge() {
         FiguraNetworkAccessor.invokeQueueString(
                 NIL_UUID,
-                api -> ((FiguraHttpAPIExt) api).figuraBadgeTool$setBadge(null),
+                api -> ((FiguraHttpAPIExt) api).figuraBadgeTool$clearBadge(),
                 (code, data) -> {
                     if (code != 200) {
                         FiguraToast.sendToast(
@@ -48,7 +48,7 @@ public class FiguraBadgeNetworkImpl {
                     FiguraToast.sendToast(
                             Component.translatableWithFallback(
                                     "figura.backend.badge_clear",
-                                    "Badge clear successfully!"
+                                    "Badge cleared successfully!"
                             )
                     );
                 }

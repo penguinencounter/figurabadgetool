@@ -2,15 +2,9 @@ plugins {
     id 'com.github.johnrengelman.shadow'
 }
 
-loom {
-    forge {
-        mixinConfig "figurabadgetool.mixins.json"
-    }
-}
-
 architectury {
     platformSetupLoomIde()
-    forge()
+    neoForge()
 }
 
 configurations {
@@ -22,20 +16,17 @@ configurations {
 }
 
 dependencies {
-    forge "net.minecraftforge:forge:$minecraft_version-$forge_version"
+    neoForge "net.neoforged:neoforge:$neoforge_version"
 
     // Figura
-    modImplementation "org.figuramc:figura-forge:$figura+$minecraft_version"
+    modImplementation "org.figuramc:figura-neoforge:$figura+$minecraft_version"
 
-    forgeRuntimeLibrary(modImplementation("com.github.FiguraMC.luaj:luaj-core:$luaj-figura"))
-    forgeRuntimeLibrary(modImplementation("com.github.FiguraMC.luaj:luaj-jse:$luaj-figura"))
-    forgeRuntimeLibrary(modImplementation("com.neovisionaries:nv-websocket-client:$nv_websocket"))
-
-    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.6"))
-    implementation("io.github.llamalad7:mixinextras-forge:0.3.6")
+    forgeRuntimeLibrary(modLocalRuntime("com.github.FiguraMC.luaj:luaj-core:$luaj-figura"))
+    forgeRuntimeLibrary(modLocalRuntime("com.github.FiguraMC.luaj:luaj-jse:$luaj-figura"))
+    forgeRuntimeLibrary(modLocalRuntime("com.neovisionaries:nv-websocket-client:$nv_websocket"))
 
     common(project(path: ':common', configuration: 'namedElements')) { transitive false }
-    shadowCommon(project(path: ':common', configuration: 'transformProductionForge')) { transitive false }
+    shadowCommon(project(path: ':common', configuration: 'transformProductionNeoForge')) { transitive false }
 }
 
 processResources {
@@ -43,10 +34,13 @@ processResources {
 
     injectProperties.put 'version', project.version
     injectProperties.put 'minecraft_range_forge', minecraft_range_forge
-    injectProperties.put 'forge_minimum', forge_minimum
+    injectProperties.put 'neoforge_range', neoforge_range
     injectProperties.forEach { k, v -> inputs.property(k.toString(), v.toString()) }
 
-    filesMatching('META-INF/mods.toml') {
+    Map<String, String> renames = new HashMap<>()
+    renames.put 'neoforge.mods.toml', 'mods.toml'
+
+    filesMatching('META-INF/*mods.toml') {
         expand injectProperties
     }
 }

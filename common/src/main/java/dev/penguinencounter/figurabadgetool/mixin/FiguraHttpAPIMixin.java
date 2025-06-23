@@ -21,4 +21,12 @@ public abstract class FiguraHttpAPIMixin implements FiguraHttpAPIExt {
                 .header("Content-Type", "application/json")
                 .build();
     }
+
+    @Unique
+    @Override
+    public HttpRequest figuraBadgeTool$clearBadge() {
+        return header("temp_badges").POST(HttpRequest.BodyPublishers.ofString("null"))
+                .header("Content-Type", "application/json")
+                .build();
+    }
 }
