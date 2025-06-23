@@ -18,7 +18,9 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - run: pip install -r requirements.txt
+      - run: |
+          pip install -r requirements.txt
+          chmod +x gradlew
       - run: python generate.py build --version ${{ inputs.version }}
       - run: |
           mkdir build-results
