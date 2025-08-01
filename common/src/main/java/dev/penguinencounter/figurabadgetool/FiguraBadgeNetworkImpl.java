@@ -5,9 +5,11 @@ import dev.penguinencounter.figurabadgetool.mixin.FiguraNetworkAccessor;
 import net.minecraft.network.chat.Component;
 import org.figuramc.figura.gui.FiguraToast;
 
-import static net.minecraft.Util.NIL_UUID;
+import java.util.UUID;
 
 public class FiguraBadgeNetworkImpl {
+    public static final UUID NIL_UUID = new UUID(0L, 0L);
+
     public static void setBadge(int id) {
         FiguraNetworkAccessor.invokeQueueString(
                 NIL_UUID,
